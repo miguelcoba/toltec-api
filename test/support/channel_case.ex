@@ -25,13 +25,13 @@ defmodule ToltecWeb.ChannelCase do
     end
   end
 
-
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Toltec.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Toltec.Repo, {:shared, self()})
     end
+
     :ok
   end
-
 end

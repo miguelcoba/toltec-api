@@ -11,7 +11,7 @@ defmodule Toltec.Application do
       # Start the Ecto repository
       supervisor(Toltec.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(ToltecWeb.Endpoint, []),
+      supervisor(ToltecWeb.Endpoint, [])
       # Start your own worker by calling: Toltec.Worker.start_link(arg1, arg2, arg3)
       # worker(Toltec.Worker, [arg1, arg2, arg3]),
     ]
