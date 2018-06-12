@@ -50,4 +50,8 @@ defmodule Toltec.DataCase do
       end)
     end)
   end
+
+  def long_string(length) do
+    Enum.reduce(1..length, "", fn _, acc -> acc <> "a" end)
+  end
 end
