@@ -41,8 +41,7 @@ defmodule Toltec.Mixfile do
       {:cowboy, "~> 1.0"},
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
-      {:guardian, "~> 1.0"},
-      {:poison, "~> 3.1"}
+      {:guardian, "~> 1.0"}
     ]
   end
 
