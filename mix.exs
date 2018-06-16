@@ -40,7 +40,9 @@ defmodule Toltec.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:comeonin, "~> 4.0"},
-      {:argon2_elixir, "~> 1.2"}
+      {:argon2_elixir, "~> 1.2"},
+      {:guardian, "~> 1.0"},
+      {:poison, "~> 3.1"}
     ]
   end
 

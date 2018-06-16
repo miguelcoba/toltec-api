@@ -21,3 +21,7 @@ config :toltec, Toltec.Repo,
 config :argon2_elixir,
   t_cost: 2,
   m_cost: 12
+
+config :toltec, Toltec.Auth.Guardian,
+  issuer: "toltec",
+  secret_key: "secret"

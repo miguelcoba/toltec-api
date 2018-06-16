@@ -8,7 +8,7 @@ defmodule Toltec.Accounts do
     Repo.all(User)
   end
 
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user(id), do: Repo.get(User, id)
 
   def create_user(attrs \\ %{}) do
     result =
@@ -34,5 +34,21 @@ defmodule Toltec.Accounts do
 
   def change_user(%User{} = user) do
     User.changeset(user, %{})
+  end
+
+  def authenticate(email, password) do
+    user = Repo.get_by(User, email: String.downcase(email))
+
+    case check_password(user, password) do
+      true -> {:ok, user}
+      _ -> :error
+    end
+  end
+
+  defp check_password(user, password) do
+    case user do
+      nil -> Comeonin.Argon2.dummy_checkpw()
+      _ -> Comeonin.Argon2.checkpw(password, user.password_hash)
+    end
   end
 end

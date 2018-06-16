@@ -30,7 +30,7 @@ defmodule Toltec.AccountsTest do
 
     test "get_user/1 returns the user with given id" do
       assert {:ok, user} = user_fixture()
-      assert Accounts.get_user!(user.id) == user
+      assert Accounts.get_user(user.id) == user
     end
 
     test "create_user/1 with valid data creates a user" do
@@ -97,7 +97,7 @@ defmodule Toltec.AccountsTest do
       assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, %{email: nil})
       assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, %{email: ""})
       assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, %{email: "abcde"})
-      assert user == Accounts.get_user!(user.id)
+      assert user == Accounts.get_user(user.id)
     end
 
     test "update_user/2 doesn't change the password" do
@@ -109,7 +109,7 @@ defmodule Toltec.AccountsTest do
     test "delete_user/1 deletes the user" do
       {:ok, user} = user_fixture()
       assert {:ok, %User{}} = Accounts.delete_user(user)
-      assert_raise Ecto.NoResultsError, fn -> Accounts.get_user!(user.id) end
+      assert nil == Accounts.get_user(user.id)
     end
 
     test "change_user/1 returns a user changeset" do
@@ -122,6 +122,16 @@ defmodule Toltec.AccountsTest do
       changeset = Accounts.change_user(user)
       assert %Ecto.Changeset{} = changeset
       assert get_change(changeset, :password) == nil
+    end
+
+    test "authenticate/2 verifies the user exists" do
+      {:ok, user} = user_fixture()
+      {:ok, auth_user} = Accounts.authenticate(user.email, "some password")
+      assert auth_user == user
+    end
+
+    test "authenticate/2 works correctly with no user provided" do
+      assert :error = Accounts.authenticate("other@user", "some password")
     end
   end
 end
