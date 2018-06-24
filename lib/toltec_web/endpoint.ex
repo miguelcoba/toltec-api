@@ -44,6 +44,8 @@ defmodule ToltecWeb.Endpoint do
     signing_salt: "TbsQVBdR"
   )
 
+  plug(CORSPlug)
+
   plug(ToltecWeb.Router)
 
   @doc """
